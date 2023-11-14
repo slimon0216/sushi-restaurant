@@ -8,7 +8,7 @@ const BlueSquare: React.FC = () => {
     <div className="blue-square-container">
       <div className="blue-square">
         <Navbar />
-        <div className="search-wrapper">
+        <div className="preview-wrapper">
           <Search />
         </div>
       </div>

@@ -4,7 +4,7 @@ const Ramenimg: React.FC = () => {
   return (
     <div className="ramen-image">
       {/* Include your ramen image here. */}
-      <img src="/input-onlinepngtools.png"alt="Ramen" />
+      <img src="/Lamen-fotor-bg-remover-2023110717176.png"alt="Ramen"/>
     </div>
   );
 }

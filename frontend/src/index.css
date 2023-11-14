@@ -21,12 +21,12 @@
   }
 
   /* 御飯糰登入 */
-  /* .loginbutton{
-    display: flex;
+  .loginbutton{
+    /* display: flex; */
     position: absolute;
-    top: 0;
-    right: 0; 
-  } */
+    top: 20px;
+    right: 200px; 
+  }
 
   .header{
     display:flex;
@@ -40,8 +40,9 @@
     display:flex;
     align-items: center;
     justify-content: center;
-    /* padding-left: 50px;
-    padding-right: 50px; */
+    padding-left: 50px;
+    padding-right: 10px;
+    padding-top:  15px;
   }
 
   .menubutton{
@@ -50,23 +51,48 @@
   }
 
   .tsmcsushi img{
-    display: flex;
-    max-width: 50%;
+    /* display: flex; */
+    position:absolute;
+    left:150px;
+    top:10px;
+    max-width: 7%;
     /* height: auto; */
   }
 
   .ramen-image {
-    display: flex;
+    /* display: flex; */
     height: 50vh;
     position:absolute;
-    bottom: -130px;
-    right: 0;
+    bottom: -600px;
+    right: 500px;
   }
 
   .ramen-image img {
-    width:auto;
-    max-width: 800px;
-    object-fit: contain; 
+    width:120vh;
+    position:absolute;
+    bottom: -250px;
+    right: -180px;
+    /* max-width: 1000px; */
+    /* object-fit: contain;  */
+    opacity:0.3;
+  }
+  .food-image {
+    /* display: flex; */
+    height: 50vh;
+    position:absolute;
+    bottom: -640px;
+    right: 400px;
+    border-radius: 20px;
+  }
+
+  .food-image img {
+    width:50vh;
+    position:absolute;
+    bottom: 670px;
+    right: -280px;
+    border-radius: 35px;
+    /* max-width: 1000px; */
+    /* object-fit: contain;  */
   }
 
   .blue-square-container {
@@ -77,30 +103,71 @@
   }
 
   .blue-square {
-    display: flex;
+    /* display: flex; */
+    position:absolute;
+    left:0px;
+    top:400px;
     flex-direction: column;
     align-items: center; /* This centers items horizontally */
     width: 90vw; /* 100px padding on both left and right */
-    height: 100vh; /* 150px padding on both top and bottom */
-    background-color: rgba(173, 216, 230, 0.9); 
+    height: 200vh; /* 150px padding on both top and bottom */
+    background-color: rgba(200, 229, 238, 0.9); 
     position: relative;
     padding-top: 10px; 
-    padding-bottom: 150px; 
+    /* padding-bottom: 150px;  */
   }
 
 
   .searchcomponents{
     height: 100%;
-    display: flex;
+    /* display: flex; */
+    position:absolute;
+    top:20px;
+    left:30px;
     width: auto;
+    object-fit: cover
   }
 
+  .Store{
+    position:absolute;
+    top:10px;
+    left:0px;
+    object-fit: cover
+  }
+  .meal-section{
+    position:absolute;
+    top:120px;
+    left:30px;
+    object-fit: cover
+  }
+
+  .Mealtext{
+    /* height: 100%; */
+    position:absolute;
+    top:5px;
+    left:0px;
+    /* display: flex; */
+    width: auto;
+    object-fit: cover
+  }
+
+  .search-section{
+    position:absolute;
+    left:40px;
+    top:100px; 
+    padding:200px;
+    width:85vw;
+    border-radius: 20px;
+    background: rgb(202, 202, 202); 
+    object-fit: cover
+  }
   .search-wrapper {
     flex: 1; /* Takes the available space */
     display: flex;
     justify-content: flex-start; /* Aligns to the left */
     align-items: center; /* Vertically centers the search */
     width: 80%; /* Adjust if you want the search to take up less space */
+    object-fit: cover
   }
 
 
@@ -109,7 +176,8 @@
     justify-content: center; 
     align-items: center;
     width: 100%;
-    gap:70px
+    gap:70px;
+    object-fit: cover;
     /* background-color: rgba(173, 216, 230, 0.8); */
   }
 
@@ -127,48 +195,72 @@
   /* 中間的搜尋選項跟開動按鈕 */
   .search-section{
     display: flex;
+    /* position:absolute;
+    left:400px;
+    top:10px;  */
     align-items: center;
     height:10vh;
     transform: translateY(50px);
     gap:5px
   }
 
-  .custom-dropdown {
-    display: flex;
+  .number-dropdown {
+    /* display: flex; */
     position: relative;
-    width: 180px; 
-    height:100%
+    top:30px;
+    width: 100px; 
+    height:50px;
+    object-fit: cover
   }
 
-  .dropdown {
-    display: flex;
-    width: 100%;
-    padding: 10px;
-    font-size: 24px;
+  .number {
+    /* display: flex; */
+    position: absolute; 
+    top:5px;
+    left: -565px;
+    width:25vw; 
+    height:5vw;
+    padding: 20px;
+    font-size:24px;
     border: none;
     border-radius: 20px;
     appearance: none; /* Remove the default dropdown arrow */
-    background-color: rgba(100, 159, 172, 0.58); /* Light gray color to match the design */
+    background-color: rgba(255, 255, 255, 0.986); /* Light gray color to match the design */
     color: #333; /* Text color */
     cursor: pointer;
     outline: none;
+    object-fit: cover
   }
 
-  .dropdownlist {
+  .dropdownlist2 {
     width: 100%;
     padding: 10px;
-    font-size: 16px;
+    font-size: 30px;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     appearance: none; /* Remove the default dropdown arrow */
     background-color: #e6e6e6; /* Light gray background */
-    color: #333; /* Text color */
+    color: #000000; /* Text color */
     cursor: pointer;
     outline: none;
     position: relative;
   }
 
-  .slogan-image{
+  .Cost1{
+    position: relative;
+    top:190px;
+    width: 180px; 
+    height:50px;
+  }
+
+  .cost-section{
+    position:absolute;
+    top:110px;
+    left:30px;
+  }
+
+
+  /* .slogan-image{
     display: flex;
     width:auto;
     justify-content: center; 
@@ -178,7 +270,7 @@
   .slogan-image img {
     width:100%;
     object-fit: cover; 
-  }
+  } */
 
   /* .specialties{
 
@@ -206,4 +298,323 @@
     object-fit: contain; 
   }
 
+  .firstpagebuttom{
+
+    position: relative;
+    top: 1000px;
+    width: 100%; 
+    height:100%;
+  }
+
 }
+
+@media screen and(min-width: 768px) {
+  .website{
+    position: relative;
+    width: 100%;
+  }
+
+  .background-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: blue;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .overlay-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: transform 0.3s;
+  }
+
+  /* 御飯糰登入 */
+  .loginbutton{
+    /* display: flex; */
+    position: absolute;
+    top: 20px;
+    right: 200px; 
+  }
+
+  .header{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    /* padding-left: 50px;
+    padding-right: 50px; */
+  }
+
+  .loginandsushi{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 50px;
+    padding-right: 10px;
+    padding-top:  15px;
+  }
+
+  .menubutton{
+    border: none;
+    background-color: transparent;
+  }
+
+  .tsmcsushi img{
+    /* display: flex; */
+    position:absolute;
+    left:150px;
+    top:10px;
+    max-width: 7%;
+    /* height: auto; */
+  }
+
+  .ramen-image {
+    /* display: flex; */
+    height: 50vh;
+    position:absolute;
+    bottom: -600px;
+    right: 500px;
+  }
+
+  .ramen-image img {
+    width:120vh;
+    position:absolute;
+    bottom: -250px;
+    right: -180px;
+    /* max-width: 1000px; */
+    /* object-fit: contain;  */
+    opacity:0.3;
+  }
+  .food-image {
+    /* display: flex; */
+    height: 50vh;
+    position:absolute;
+    bottom: -640px;
+    right: 400px;
+    border-radius: 20px;
+  }
+
+  .food-image img {
+    width:50vh;
+    position:absolute;
+    bottom: 670px;
+    right: -280px;
+    border-radius: 35px;
+    /* max-width: 1000px; */
+    /* object-fit: contain;  */
+  }
+
+  .blue-square-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust if necessary */
+  }
+
+  .blue-square {
+    /* display: flex; */
+    position:relative;
+    left:0px;
+    top:400px;
+    flex-direction: column;
+    align-items: center; /* This centers items horizontally */
+    width: 90vw; /* 100px padding on both left and right */
+    height: 200vh; /* 150px padding on both top and bottom */
+    background-color: rgba(200, 229, 238, 0.9); 
+    position: relative;
+    padding-top: 10px; 
+    /* padding-bottom: 150px;  */
+  }
+
+
+  .searchcomponents{
+    height: 100%;
+    /* display: flex; */
+    position:absolute;
+    top:20px;
+    left:30px;
+    width: auto;
+    object-fit: cover
+  }
+
+  .Store{
+    position:absolute;
+    top:10px;
+    left:0px;
+    object-fit: cover
+  }
+  .meal-section{
+    position:absolute;
+    top:120px;
+    left:30px;
+    object-fit: cover
+  }
+
+  .Mealtext{
+    /* height: 100%; */
+    position:absolute;
+    top:5px;
+    left:0px;
+    /* display: flex; */
+    width: auto;
+    object-fit: cover
+  }
+
+  .search-section{
+    position:absolute;
+    left:40px;
+    top:100px; 
+    padding:200px;
+    width:85vw;
+    border-radius: 20px;
+    background: rgb(202, 202, 202); 
+    object-fit: cover
+  }
+  .search-wrapper {
+    flex: 1; /* Takes the available space */
+    display: flex;
+    justify-content: flex-start; /* Aligns to the left */
+    align-items: center; /* Vertically centers the search */
+    width: 80%; /* Adjust if you want the search to take up less space */
+    object-fit: cover
+  }
+
+
+  .navbar {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: 100%;
+    gap:70px;
+    object-fit: cover;
+    /* background-color: rgba(173, 216, 230, 0.8); */
+  }
+
+  .nav-links{
+    padding-top: 10px;
+  }
+
+  .nav-links a {
+    /* margin: 0 10px;  */
+    text-decoration: none; 
+    color:#333F72; /* This will make the links blue. Adjust the color if needed. */
+    font-size: 28px; /* This makes the text bigger. Adjust the size if needed. */
+  }
+
+  /* 中間的搜尋選項跟開動按鈕 */
+  .search-section{
+    display: flex;
+    /* position:absolute;
+    left:400px;
+    top:10px;  */
+    align-items: center;
+    height:10vh;
+    transform: translateY(50px);
+    gap:5px
+  }
+
+  .number-dropdown {
+    /* display: flex; */
+    position: relative;
+    top:30px;
+    width: 100px; 
+    height:50px;
+    object-fit: cover
+  }
+
+  .number {
+    /* display: flex; */
+    position: absolute; 
+    top:5px;
+    left: -565px;
+    width:25vw; 
+    height:5vw;
+    padding: 20px;
+    font-size:24px;
+    border: none;
+    border-radius: 20px;
+    appearance: none; /* Remove the default dropdown arrow */
+    background-color: rgba(255, 255, 255, 0.986); /* Light gray color to match the design */
+    color: #333; /* Text color */
+    cursor: pointer;
+    outline: none;
+    object-fit: cover
+  }
+
+  .dropdownlist2 {
+    width: 100%;
+    padding: 10px;
+    font-size: 30px;
+    border: none;
+    border-radius: 20px;
+    appearance: none; /* Remove the default dropdown arrow */
+    background-color: #e6e6e6; /* Light gray background */
+    color: #000000; /* Text color */
+    cursor: pointer;
+    outline: none;
+    position: relative;
+  }
+
+  .Cost1{
+    position: relative;
+    top:190px;
+    width: 180px; 
+    height:50px;
+  }
+
+  .cost-section{
+    position:absolute;
+    top:110px;
+    left:30px;
+  }
+
+
+  /* .slogan-image{
+    display: flex;
+    width:auto;
+    justify-content: center; 
+
+  }
+
+  .slogan-image img {
+    width:100%;
+    object-fit: cover; 
+  } */
+
+  /* .specialties{
+
+  } */
+
+  .testimonials{
+    display: flex;
+    width:auto;
+    justify-content: center; 
+  }
+
+  .testimonials img{
+    width:100%;
+    object-fit: contain; 
+  }
+
+  .bottomcontact{
+    display: flex;
+    width:auto;
+    justify-content: center; 
+  }
+
+  .bottomcontact img{
+    width:100%;
+    object-fit: contain; 
+  }
+
+  .firstpagebuttom{
+
+    position: relative;
+    top: 1000px;
+    width: 100%; 
+    height:100%;
+  }
+
+}
+

@@ -37,18 +37,20 @@ const Website: React.FC = () => {
         </div>
         <Ramenimg />
       </div> 
-      <div className='firstpagebuttom'>
+
+        
+      {/* <div className='firstpagebuttom'>
         <Sloganimg/>
       </div>
       <div>
         <Specialties/>
-      </div>
-      <div className='firstpagebuttom'>
+    </div>*/}
+      {/* <div className='firstpagebuttom'>
         <Testimonials/>
-      </div>
+      </div> */}
       <div className='firstpagebuttom'>
         <BottomContact/>
-      </div>
+      </div> 
     </>
   );
 }

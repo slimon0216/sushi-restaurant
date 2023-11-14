@@ -5,7 +5,7 @@
   margin: 0;
 }
 
-.Store{ 
+.Cost{ 
   display: flex; 
   overflow-x: hidden; 
   overflow-y: hidden; 
@@ -39,11 +39,11 @@
   flex-direction: undefined;  */
 } 
  
-.Store-text{ 
+.Costtext{ 
   position: relative; 
   opacity: 1; 
   font-family: "Roboto"; 
-  line-height: 30px; 
+  line-height: 20px; 
   letter-spacing: 0em; 
   text-align: left; 
   align-items: center; 
@@ -51,5 +51,13 @@
 
 } 
 
- 
 
+.textinput{
+  position:absolute;
+  top:5px;
+  left:230px;
+  width:25vw;  
+  height:23vw;
+  border-radius: 20px;
+  background: rgb(255, 255, 255); 
+}
