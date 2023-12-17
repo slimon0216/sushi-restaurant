@@ -27,10 +27,14 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           
       - name: Push Backend to Docker Hub
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:${{ steps.prep.outputs.tag }}
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:${{ steps.prep.outputs.tag }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:latest
           
       - name: Push Frontend to Docker Hub
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-frontend:${{ steps.prep.outputs.tag }}
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-frontend:${{ steps.prep.outputs.tag }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-frontend:latest
       
       - name: Trigger Backend Azure Webhook
         run: curl -X POST ${{ secrets.AZURE_WEBHOOK_BACKEND_URL }}
