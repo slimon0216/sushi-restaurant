@@ -10,5 +10,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker --tag sushi-backend:$(date +%s) --file backend/Dockerfile .
+        run: docker build --tag sushi-backend:$(date +%s) --file backend/Dockerfile .
     
