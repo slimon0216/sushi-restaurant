@@ -20,7 +20,7 @@ jobs:
 
       - name: Build the Frontend Docker image
         run: |
-          docker build --build-arg REACT_APP_API_URL=https://sushi-backend2.azurewebsites.net/api --tag ${{ secrets.DOCKERHUB_USERNAME }}/sushi-frontend:${{ steps.prep.outputs.tag }} --tag ${{ secrets.DOCKERHUB_USERNAME }}/sushi-frontend:latest --file frontend/Dockerfile .
+          docker build --build-arg REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL}} --tag ${{ secrets.DOCKERHUB_USERNAME }}/sushi-frontend:${{ steps.prep.outputs.tag }} --tag ${{ secrets.DOCKERHUB_USERNAME }}/sushi-frontend:latest --file frontend/Dockerfile .
 
       - name: Login to DockerHub
         uses: docker/login-action@v1 
