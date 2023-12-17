@@ -21,7 +21,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Backend Docker image
-        run: docker build --tag ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:${{ needs.prepare-tag.outputs.tag }} --file backend/Dockerfile .
+        run: |
+          echo "Building image with tag ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:${{ needs.prepare-tag.outputs.tag }}"
+          docker build --tag ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:${{ needs.prepare-tag.outputs.tag }} --file backend/Dockerfile .
 
   build-frontend:
     needs: prepare-tag
@@ -42,8 +44,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Push Backend to Docker Hub
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:${{ needs.prepare-tag.outputs.tag }}
-          
+        run: |
+          echo "Pushing image ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:${{ needs.prepare-tag.outputs.tag }}"
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:${{ needs.prepare-tag.outputs.tag }}
       - name: Push Frontend to Docker Hub
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-frontend:${{ needs.prepare-tag.outputs.tag }}
 
