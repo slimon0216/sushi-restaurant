@@ -1,0 +1,38 @@
+name: Deploy to Azure
+on:
+  push:
+    branches: [ "prod" ]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Prepare tag
+        id: prep
+        run: echo ::set-output name=tag::$(echo $(date +%Y%m%d%H%M%S)-$(echo $GITHUB_SHA | cut -c1-7))
+
+      - name: Build the Backend Docker image
+        run: docker build --tag slimon110/sushi-backend:${{ steps.prep.outputs.tag }} --file backend/Dockerfile .
+
+      - name: Push Backend to Docker Hub
+        run: docker push slimon110/sushi-backend:${{ steps.prep.outputs.tag }}
+
+      - name: Build the Frontend Docker image
+        run: docker build --tag slimon110/sushi-frontend:${{ steps.prep.outputs.tag }} --file frontend/Dockerfile .
+
+      - name: Push Frontend to Docker Hub
+        run: docker push slimon110/sushi-frontend:${{ steps.prep.outputs.tag }}
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Trigger Backend Azure Webhook
+        run: curl -X POST ${{ secrets.AZURE_WEBHOOK_BACKEND_URL }}
+
+      - name: Trigger Frontend Azure Webhook
+        run: curl -X POST ${{ secrets.AZURE_WEBHOOK_FRONTEND_URL }}
