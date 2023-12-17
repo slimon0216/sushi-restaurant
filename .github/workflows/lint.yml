@@ -1,52 +1,45 @@
-name: Lint and Format Code
+name: Build and Deploy
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ "prod" ]
 
 jobs:
-  lint-and-format-and-test-backend:
+  build-and-push:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      
+      - name: Prepare tag
+        id: prep
+        run: echo ::set-output name=tag::$(echo $(date +%Y%m%d%H%M%S)-$(echo $GITHUB_SHA | cut -c1-7))
+      
+      - name: Build the Backend Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:${{ steps.prep.outputs.tag }} -t ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:latest --file backend/Dockerfile .
 
-      - name: Setup Node.js for Backend
-        uses: actions/setup-node@v2
+      - name: Build the Frontend Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/sushi-frontend:${{ steps.prep.outputs.tag }} -t ${{ secrets.DOCKERHUB_USERNAME }}/sushi-frontend:latest --file frontend/Dockerfile .
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1 
         with:
-          node-version: '18'
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          
+      - name: Push Backend to Docker Hub
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:${{ steps.prep.outputs.tag }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:latest
+          
+      - name: Push Frontend to Docker Hub
+        run: |
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-frontend:${{ steps.prep.outputs.tag }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-frontend:latest
+      
+      - name: Trigger Backend Azure Webhook
+        run: curl -X POST ${{ secrets.AZURE_WEBHOOK_BACKEND_URL }}
 
-      - name: Install Backend Dependencies
-        run: yarn install
-        working-directory: backend
-
-      - name: Run Backend Linter
-        run: yarn lint
-        working-directory: backend
-
-      - name: Run Backend Prettier Check
-        run: yarn prettier --check .
-        working-directory: backend
-
-      - name: Run Backend Unit Testing
-        run: yarn test
-        working-directory: backend
-
-  lint-and-format-frontend:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Node.js for Frontend
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18'
-
-      - name: Install Frontend Dependencies
-        run: yarn install
-        working-directory: frontend
-
-      - name: Run Frontend Linter
-        run: yarn lint
-        working-directory: frontend
-
-      - name: Run Frontend Prettier Check
-        run: yarn prettier --check .
-        working-directory: frontend
+      - name: Trigger Frontend Azure Webhook
+        run: curl -X POST ${{ secrets.AZURE_WEBHOOK_FRONTEND_URL }}
