@@ -5,51 +5,33 @@ on:
     branches: [ "prod" ]
 
 jobs:
-  prepare-tag:
+  build-and-push:
     runs-on: ubuntu-latest
-    outputs:
-      tag: ${{ steps.prep.outputs.tag }}
     steps:
       - uses: actions/checkout@v3
+      
       - name: Prepare tag
         id: prep
         run: echo ::set-output name=tag::$(echo $(date +%Y%m%d%H%M%S)-$(echo $GITHUB_SHA | cut -c1-7))
-
-  build-backend:
-    needs: prepare-tag
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+      
       - name: Build the Backend Docker image
-        run: |
-          echo "Building image with tag ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:${{ needs.prepare-tag.outputs.tag }}"
-          docker build --tag ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:${{ needs.prepare-tag.outputs.tag }} --file backend/Dockerfile .
-
-  build-frontend:
-    needs: prepare-tag
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+        run: docker build --tag ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:${{ steps.prep.outputs.tag }} --file backend/Dockerfile .
+      
       - name: Build the Frontend Docker image
-        run: docker build --tag ${{ secrets.DOCKERHUB_USERNAME }}/sushi-frontend:${{ needs.prepare-tag.outputs.tag }} --file frontend/Dockerfile .
+        run: docker build --tag ${{ secrets.DOCKERHUB_USERNAME }}/sushi-frontend:${{ steps.prep.outputs.tag }} --file frontend/Dockerfile .
 
-  push-and-deploy:
-    needs: [build-backend, build-frontend]
-    runs-on: ubuntu-latest
-    steps:
       - name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
+          
       - name: Push Backend to Docker Hub
-        run: |
-          echo "Pushing image ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:${{ needs.prepare-tag.outputs.tag }}"
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:${{ needs.prepare-tag.outputs.tag }}
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-backend:${{ steps.prep.outputs.tag }}
+          
       - name: Push Frontend to Docker Hub
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-frontend:${{ needs.prepare-tag.outputs.tag }}
-
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/sushi-frontend:${{ steps.prep.outputs.tag }}
+      
       - name: Trigger Backend Azure Webhook
         run: curl -X POST ${{ secrets.AZURE_WEBHOOK_BACKEND_URL }}
 
