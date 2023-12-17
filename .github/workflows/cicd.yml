@@ -5,15 +5,10 @@ on:
     branches: [ "prod" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-
-    
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker . -f backend/Dockerfile --tag sushi-backend:$(date +%s)
+      - uses: actions/checkout@v3
+      - name: Build the Docker image
+        run: docker -t sushi-backend:$(date +%s) -f backend/Dockerfile .
     
